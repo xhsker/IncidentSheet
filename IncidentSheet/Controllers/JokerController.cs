@@ -46,7 +46,7 @@ namespace IncidentLog.Controllers
                 context.Jokers.Add(newJoker);
                 context.SaveChanges();
 
-                return View("/Joker");
+                return View("/NewEntry");
             }
             return View(addJokerViewModel);
         }

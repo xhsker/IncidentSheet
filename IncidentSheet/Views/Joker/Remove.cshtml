@@ -1,0 +1,22 @@
+﻿<h1>@ViewBag.title</h1>
+
+<form method="post">
+
+    @foreach (var joker in ViewBag.jokers)
+    {
+        <input type="checkbox" name="jokerIds" id="@joker.ID" value="@joker.ID"/>
+        <label for="@joker.ID"></label>
+            <table>
+                <thead>Date of the Incident</thead>
+                <tr>@joker.IncidentDate.ToString("MM dd, yyyy")</tr>
+                <thead>Unit Reporting</thead>
+                <tr>@joker.Unit</tr>
+                <thead>Type of Incident</thead>
+                <tr>@joker.Incident</tr>
+            </table>
+    }
+
+    <input type="submit" value="Remove Selected Incident(s)"/>
+
+</form>
+
