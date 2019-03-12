@@ -23,6 +23,8 @@ namespace IncidentLog.Controllers
 
             return View(jokers);
         }
+
+
         public IActionResult Add()
         {
             AddJokerViewModel addJokerViewModel = new AddJokerViewModel();
@@ -70,6 +72,12 @@ namespace IncidentLog.Controllers
             return Redirect("/");
         }
 
+        public IActionResult Search()
+        {
+            List<Joker> jokers = context.Jokers.ToList();
+
+            return View(jokers);
+        }
 
     }
 }

@@ -26,15 +26,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">IncidentSheet</a>
+                <a asp-area="" asp-controller="User" asp-action="Add" class="navbar-brand">IncidentSheet</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Joker" asp-action="Remove">Remove Entry</a></li>
+                    <li><a asp-area="" asp-controller="User" asp-action="Add">Register/Log In</a></li>
+                    <li><a asp-area="" asp-controller="Joker" asp-action="Search">Search</a></li>
                 </ul>
-                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
@@ -45,7 +44,9 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - IncidentSheet</p>
+            <p>&copy; 2019 - IncidentSheet
+                Created by: Thomas Lake
+            </p>
         </footer>
     </div>
 

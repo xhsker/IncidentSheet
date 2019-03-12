@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using IncidentSheet.Data;
 using System.Linq;
 
-namespace IncidentLog.Controllers
+namespace IncidentSheet.Controllers
 {
     public class SearchController : Controller
     {
@@ -24,7 +24,7 @@ namespace IncidentLog.Controllers
             {
                 return View(/*db.Joker.Where(x => x.Incident.StartsWith(search) || search == null).ToList()*/);
             }
-            return View();
+            return View("/Search");
         }
     }
 }

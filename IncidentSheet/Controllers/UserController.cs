@@ -20,9 +20,14 @@ namespace IncidnetLog.Controllers
 
         public IActionResult Index()
         {
-            List<User> users = context.Users.ToList();
+            var model = new DropDownViewModel { UnitType = UnitType.District1 };
+            return View(model);
+        }
 
-            return View(users);
+        [HttpPost]
+        public ActionResult Index (DropDownViewModel model)
+        {
+            return View(model);
         }
 
         public IActionResult Add()
