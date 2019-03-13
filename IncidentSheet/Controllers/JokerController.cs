@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using IncidentSheet.Data;
 using System.Linq;
 
-namespace IncidentLog.Controllers
+namespace IncidentSheet.Controllers
 {
     public class JokerController : Controller
     {
@@ -72,12 +72,23 @@ namespace IncidentLog.Controllers
             return Redirect("/");
         }
 
-        public IActionResult Search()
+        public IActionResult Search(string searchBy, string search)
         {
             List<Joker> jokers = context.Jokers.ToList();
 
-            return View(jokers);
+            if (searchBy == "Unit")
+            {
+                return View(jokers.Where(x => x.Unit.Equals(search) || search == null).ToList());
+            }
+            if (searchBy == "IncidentDate")
+            {
+                return View(jokers.Where(x => x.IncidentDate.Equals(search) || search == null).ToList());
+            }
+            if (searchBy == "Incident")
+            {
+                return View(jokers.Where(x => x.Incident.StartsWith(search) || search == null).ToList());
+            }
         }
-
-    }
+    } 
 }
+       

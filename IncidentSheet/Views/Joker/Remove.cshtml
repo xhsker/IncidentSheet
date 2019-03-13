@@ -6,7 +6,6 @@
         border-collapse: collapse;
         width: 100%;
     }
-
         #entry th {
             padding-top: 12px;
             padding-bottom: 12px;
@@ -14,7 +13,6 @@
             background-color: forestgreen;
             color: white
         }
-
         #entry td {
             border: 1px solid;
             padding: 8px;
@@ -25,47 +23,47 @@
         }
 </style>
 
-
-
 <form method="post">
 
-    <div style="font-family: Arial">
-
-        @foreach (var joker in ViewBag.jokers)
-        {
-            <input type="checkbox" name="jokerIds" id="@joker.ID" value="@joker.ID" />
-            <label for="@joker.ID"></label>
-
-            <table id="entry">
-
+    <div>
+        <table id="entry">
+            <tr>
+                <th align="center">
+                    Unit Reporting
+                </th>
+                <th align="center">
+                    Date of the Incident
+                </th>
+                <th align="center">
+                    Type of Incident
+                </th>
+                <th align="center">
+                    Check to Remove Entry
+                </th>
+            </tr>
+            @foreach (var joker in ViewBag.jokers)
+            {
                 <tr>
-                    <td align="center">
-                        Unit Reporting
-                    </td>
-                    <td align="center">
-                        Date of the Incident
-                    </td>
-                    <td align="center">
-                        Type of Incident
-                    </td>
-                </tr>
-
-                <tr>
-                    <td align="center">
-                        @joker.IncidentDate.ToString("MM dd, yyyy")
-                    </td>
                     <td align="center">
                         @joker.Unit
                     </td>
                     <td align="center">
+                        @joker.IncidentDate.ToString("MM/dd/yyyy")
+                    </td>
+                    <td align="center">
                         @joker.Incident
                     </td>
+                    <td align="center">
+                        @Html.CheckBox("joker.ID", false)
+                    </td>
                 </tr>
-            </table>
-        }
-
-
-        <input type="submit" value="Remove Selected Incident(s)" />
+            }
+        </table>
+</div>
+        <br/>
+        <br/>
+        <br/>
+        <input class="form-group"  type="submit" value="Remove Selected Incident(s)" />
 
 </form>
 

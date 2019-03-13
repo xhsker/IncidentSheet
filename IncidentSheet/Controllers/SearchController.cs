@@ -7,24 +7,26 @@ using IncidentSheet.Data;
 using System.Linq;
 
 namespace IncidentSheet.Controllers
-{
+{/*
     public class SearchController : Controller
     {
+        Joker db = new Joker();
+
         public IActionResult Index(string searchBy, string searchInput)
         {
             if (searchBy == "Unit")
-            {
-                return View(/*db.Joker.Where(x => x.Unit.StartsWith(search) || search == null).ToList()*/);
+            
+                return View(db.Joker.Where(x => x.Unit.StartsWith(search) || search == null).ToList());
             }
             if (searchBy == "IncidentDate")
             {
-                return View(/*db.Joker.Where(x => x.IncidentDate == search || search == null).ToList()*/);
+                return View(/*db.Joker.Where(x => x.IncidentDate == search || search == null).ToList());
             }
             if (searchBy == "Incident")
             {
-                return View(/*db.Joker.Where(x => x.Incident.StartsWith(search) || search == null).ToList()*/);
+                return View(/*db.Joker.Where(x => x.Incident.StartsWith(search) || search == null).ToList());
             }
             return View("/Search");
         }
-    }
+    }*/
 }
