@@ -9,7 +9,11 @@ namespace IncidentSheet.Models
     {
         public string UserName { get; set; }
         public string UserPassword { get; set; }
-        public int UserId { get; set; }
+        public string VerifyPassword { get; set; }
+        private string Role { get; set; }
+        public int ID { get; set; }
+
+        public IList<Joker> Jokers { get; set; }
 
     }
 }

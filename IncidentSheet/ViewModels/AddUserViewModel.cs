@@ -17,9 +17,16 @@ namespace IncidentSheet.ViewModels
 
         [Required]
         [Display(Name = "User's Password")]
+        [DataType(DataType.Password)]
         public string UserPassword { get; set; }
 
-        public int UserId { get; set; }
+        [Required]
+        [Display(Name = "Verify Password")]
+        [DataType(DataType.Password)]
+        [Compare("UserPassword", ErrorMessage = "The password and conformation password do not match")]
+        public string VerifyPassword { get; set; }
+
+        private string Role { get; set; }
 
     }
 }

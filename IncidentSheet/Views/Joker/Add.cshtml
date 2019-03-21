@@ -5,10 +5,11 @@
 
 <form asp-controller="Joker" asp-action="Add" method="post">
 
+
     <div class="container">
         <div class="form-group">
             <label class="control-label" for="date">Date of Incident</label>
-            <input class="form-control" asp-for="IncidentDate" type="date" placeholder="MM/dd/yyyy" value="IncidentDate"/>
+            <input class="form-control" asp-for="IncidentDate" type="date" placeholder="MM/dd/yyyy" value="IncidentDate" />
             <span asp-validation-for="IncidentDate"></span>
         </div>
     </div>
@@ -23,12 +24,9 @@
 
     <div class="container">
         <div class="form-group">
-            @using (Html.BeginForm())
-            {
                 <label class="control-label">Unit Reporting</label>
                 <b>Select Unit Type:</b> @Html.DropDownListFor(x => x.Unit, Enum.GetValues(typeof(UnitType))
-                       .Cast<UnitType>().Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }))
-            }
+                .Cast<UnitType>().Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }))
             <span asp-validation-for="Unit"></span>
             <br />
             <br />
@@ -38,7 +36,7 @@
     <div class="container">
         <div class="form-group">
             <label class="control-label">Type of Incident</label>
-            <input class="form-control" asp-for="Incident"/>
+            <input class="form-control" asp-for="Incident" />
             <span asp-validation-for="Incident"></span>
         </div>
     </div>
@@ -49,9 +47,9 @@
             <span asp-validation-for="Summary"></span>
         </div>
     </div>
-  
 
-    <input type="submit" value="Add Joker"/>
-
+    <input type="submit" value="Add Joker Entry" />
 </form>
+
+
 

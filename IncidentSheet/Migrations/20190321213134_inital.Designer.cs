@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IncidentSheet.Migrations
 {
     [DbContext(typeof(JokerDbContext))]
-    [Migration("20190312003351_intial")]
-    partial class intial
+    [Migration("20190321213134_inital")]
+    partial class inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,35 +37,37 @@ namespace IncidentSheet.Migrations
 
                     b.Property<int>("Unit");
 
+                    b.Property<int?>("UserIDID");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("UserIDID");
 
                     b.ToTable("Jokers");
                 });
 
             modelBuilder.Entity("IncidentSheet.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("JokerID");
 
                     b.Property<string>("UserName");
 
                     b.Property<string>("UserPassword");
 
-                    b.HasKey("UserId");
+                    b.Property<string>("VerifyPassword");
 
-                    b.HasIndex("JokerID");
+                    b.HasKey("ID");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("IncidentSheet.Models.User", b =>
+            modelBuilder.Entity("IncidentSheet.Models.Joker", b =>
                 {
-                    b.HasOne("IncidentSheet.Models.Joker")
-                        .WithMany("Users")
-                        .HasForeignKey("JokerID");
+                    b.HasOne("IncidentSheet.Models.User", "UserID")
+                        .WithMany("Jokers")
+                        .HasForeignKey("UserIDID");
                 });
 #pragma warning restore 612, 618
         }

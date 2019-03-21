@@ -5,29 +5,23 @@ using IncidentSheet.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using IncidentSheet.Data;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IncidnetLog.Controllers
 {
     public class UserController : Controller
     {
-        private readonly JokerDbContext context;
+        private JokerDbContext context;
 
         public UserController(JokerDbContext dbContext)
         {
             context = dbContext;
         }
-
-
         public IActionResult Index()
         {
-            var model = new DropDownViewModel { UnitType = UnitType.District1 };
-            return View(model);
-        }
+            List<User> users = context.Users.ToList();
 
-        [HttpPost]
-        public ActionResult Index (DropDownViewModel model)
-        {
-            return View(model);
+            return View(users);
         }
 
         public IActionResult Add()
@@ -36,23 +30,51 @@ namespace IncidnetLog.Controllers
             return View(addUserViewModel);
 
         }
+
         [HttpPost]
-        public IActionResult Add(AddUserViewModel addUserViewModel)
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(AddUserViewModel model)
         {
+            List<User> users = context.Users.ToList();
+
+            var userExists = users.Any(x => x.UserName == model.UserName);
             if (ModelState.IsValid)
             {
-                User newUser = new IncidentSheet.Models.User
+                return RedirectToAction("/User/Index");
+            }
+            else
+            {
+                User newUser = new User
                 {
-                    UserName = addUserViewModel.UserName,
-                    UserPassword = addUserViewModel.UserPassword
+                    UserName = model.UserName,
+                    UserPassword = model.UserPassword,
+
                 };
 
                 context.Users.Add(newUser);
                 context.SaveChanges();
 
-                return View("/User");
+                return RedirectToAction("Index", "Joker");
             }
-            return View(addUserViewModel);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(AddUserViewModel model)
+        {
+            List<User> users = context.Users.ToList();
+
+            var userExists = users.Any(x => x.UserName == model.UserName);
+            if (ModelState.IsValid)
+            {
+                return View(userExists);
+            }
+            else
+            {
+                return Redirect("/Joker");
+            }
         }
     }
 }

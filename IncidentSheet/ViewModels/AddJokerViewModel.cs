@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace IncidentSheet.ViewModels
 {
 
@@ -13,23 +14,13 @@ namespace IncidentSheet.ViewModels
     {
         [Required]
         [Display(Name = "Date of Incident")]
+        [DataType(DataType.Date)]
         public DateTime IncidentDate { get; set; }
 
         [Required]
         [Display(Name = "Time of Incident")]
+        [DataType(DataType.Time)]
         public DateTime IncidentTime { get; set; }
-
-
-        public AddJokerViewModel()
-        {
-            string[] enumUnitTypes = Enum.GetNames(typeof(UnitType));
-            List<string> unit = new List<string>(enumUnitTypes);
-        }
-
-        /* [Required(ErrorMessage ="You must enter a Unit reporting the Incident")]*/
-        [Display(Name = "Unit reporting Incident")]
-        public UnitType Unit { get; set; }
-
 
         /*[Required(ErrorMessage = "Must identify the incident which occurred")]*/
         [Display(Name = "Type of Crime(s)")]
@@ -38,5 +29,11 @@ namespace IncidentSheet.ViewModels
         /*[Required(ErrorMessage = "Must enter a summary of the Incident*/
         [Display(Name = "Summary of the Incident")]
         public string Summary { get; set; }
+
+        /* [Required(ErrorMessage ="You must enter a Unit reporting the Incident")]*/
+        [Display(Name = "Unit reporting Incident")]
+        public UnitType Unit { get; set; }
+
+        
     }
 }

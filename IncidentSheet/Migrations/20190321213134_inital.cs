@@ -4,10 +4,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IncidentSheet.Migrations
 {
-    public partial class intial : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserName = table.Column<string>(nullable: true),
+                    UserPassword = table.Column<string>(nullable: true),
+                    VerifyPassword = table.Column<string>(nullable: true),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Jokers",
                 columns: table => new
@@ -18,47 +33,33 @@ namespace IncidentSheet.Migrations
                     Incident = table.Column<string>(nullable: true),
                     Summary = table.Column<string>(nullable: true),
                     ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserIDID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Jokers", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserName = table.Column<string>(nullable: true),
-                    UserPassword = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    JokerID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_Users_Jokers_JokerID",
-                        column: x => x.JokerID,
-                        principalTable: "Jokers",
+                        name: "FK_Jokers_Users_UserIDID",
+                        column: x => x.UserIDID,
+                        principalTable: "Users",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_JokerID",
-                table: "Users",
-                column: "JokerID");
+                name: "IX_Jokers_UserIDID",
+                table: "Jokers",
+                column: "UserIDID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Jokers");
 
             migrationBuilder.DropTable(
-                name: "Jokers");
+                name: "Users");
         }
     }
 }

@@ -1,35 +1,44 @@
 ﻿@model IncidentSheet.ViewModels.AddUserViewModel
 
-@{ 
-    ViewData["Title"] = "Add";
+@{
+    ViewData["Title"] = "Register as a new user";
 }
 
+@{
+    <h3>@ViewBag.Message</h3>
+}
+<h2>Create a new account user</h2>
 
-    <h2>Add a New User</h2>
+<form asp-controller="User" asp-action="Add" method="post">
 
-    <form asp-controller="User" asp-action="Add" method="post">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" type="text" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPassword" class="control-label"></label>
+                <input asp-for="UserPassword" class="form-control" type="password" />
+                <span asp-validation-for="UserPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VerifyPassword" class="control-label"></label>
+                <input asp-for="VerifyPassword" class="form-control" type="password" />
+                <span asp-validation-for="VerifyPassword" class="text-danger"></span>
+            </div>
 
-        <div class="row">
-            <div class="col-md-4">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="UserName" class="control-label"></label>
-                    <input asp-for="UserName" class="form-control" type="text"/>
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UserPassword" class="control-label"></label>
-                    <input asp-for="UserPassword" class="form-control" type="password" />
-                    <span asp-validation-for="UserPassword" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default"/>
-                </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
+    </div>
 
-        <div>
-            <a asp-controller="Joker" asp-action="Index">Back to Incident List</a>
-        </div>
+    <div>
+        <a asp-controller="User" asp-action="Index">Login Page</a>
+    </div>
 </form>
 

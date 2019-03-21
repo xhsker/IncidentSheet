@@ -2,15 +2,92 @@
 
 <h1>@ViewBag.Title</h1>
 
-@if (Model.Count == 0)
-{
-    <p> No Incident Sheets have been entered</p>
-}
+<style>
+    #entry {
+        font-family: Tahoma;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-    <form asp-controller="Joker" asp-action="Index">
+        #entry th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: forestgreen;
+            color: white
+        }
 
-    <text>Please go to the login page </text>
+        #entry td {
+            border: 1px solid;
+            padding: 8px;
+        }
 
-    </form>
+        #entry tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+</style>
+
+<form asp-controller="Joker" asp-action="Index">
+
+    <div>
+
+        <table id="entry">
+
+            <tr>
+                <th align="center">
+                    Date of Incident
+                </th>
+                <th align="center">
+                    Time of Incident
+                </th>
+                <th align="center">
+                    Reporting Unit
+                </th>
+                <th align="center">
+                    Type of Incident
+                </th>
+                <th align="center">
+                    Summary
+                </th>
+            </tr>
+
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td>No Entries</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td align="center">
+                            @Html.DisplayFor(modelItem => item.IncidentDate)
+                        </td>
+                        <td align="center">
+                            @Html.DisplayFor(modelItem => item.IncidentTime)
+                        </td>
+                        <td align="center">
+                            @Html.DisplayFor(modelItem => item.Unit)
+                        </td>
+                        <td align="center">
+                            @Html.DisplayFor(modelItem => item.Incident)
+                        </td>
+                        <td align="center">
+                            @Html.DisplayFor(modelItem => item.Summary)
+                        </td>
+                        <td>
+                            <a href="/Joker/Search">Search</a>  |
+                            <a href="/Joker/NewEntry">View Entry</a>
+                            <a href="/Joker/Remove">Delete Entry</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+</form>
 
 <p><a asp-controller="Joker" asp-action="Add">Add New Incident</a></p>
