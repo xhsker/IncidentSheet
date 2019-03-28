@@ -1,89 +1,68 @@
-﻿@model IEnumerable<IncidentSheet.Models.Joker>
+﻿@using PagedList.Mvc;
+@using PagedList;
 
-<style>
-    #entry {
-        font-family: Tahoma;
-        border-collapse : collapse;
-        width: 100%;
+
+@model IPagedList<IncidentSheet.Models.Joker>
+
+<p>
+
+    @using (Html.BeginForm( "Search", "Joker", FormMethod.Get))/* name of the view used(action), name of controller used, formmethod.get*/
+    {
+        <b>Search By:</b>@Html.RadioButton("searchBy", "Unit", true) <text>Reporting Unit</text>
+        @Html.RadioButton("searchBy", "IncidentDate")<text> Date of Incident</text>
+        @Html.RadioButton("searchBy", "Incident")<text> Type of Incident </text>
+        @Html.TextBox("search")<input type="submit" value="Search" />
     }
+</p>
 
-    #entry th{
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: center;
-        background-color: forestgreen;
-        color: white
-    }
-
-    #entry td{
-        border: 1px solid;
-        padding: 8px;
-    }
-
-    #entry tr:nth-child(even){background-color: lightgrey;}
+<div style="font-family: Arial">
 
 
-</style>
+    <table border="1">
+        
+        <tr>
+            <th>
+                @Html.ActionLink("Unit", "Search", new { sort = ViewBag.SortByUnit,
+               searchBy = ViewBag.Request.QueryString["searchBy"],
+               search = ViewBag.Request.QueryString["search"] })
+            </th>
+            <th>
+                @Html.ActionLink("IncidentDate", "Search", new { sort = ViewBag.SortByIncidentDate,
+               searchBy = ViewBag.Request.QueryString["SearchBy"],
+               search = ViewBag.Request.QueryString["search"] })
+            </th>
+            <th>
+                @Html.ActionLink("Incident", "Search", new { sort = ViewBag.SortByIncident,
+               searchBy = ViewBag.Request.QueryString["SearchBy"],
+               search = ViewBag.Request.QueryString["search"] })
+            </th>
+        </tr>
 
-<body>
-
-    @{
-        ViewBag.Title = "Search Daily Incident Reports";
-
-        string[] enumUnitTypes = Enum.GetNames(typeof(UnitType));
-        List<string>unit = new List<string> (enumUnitTypes);
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3">No Match with Search Criteria</td>
+            </tr>
         }
-            <p>
-                @using (Html.BeginForm("Search", "Joker", FormMethod.Get))
-                {
-                    <b>Search By: </b>/*<b>Select Unit Type:</b> @Html.DropDownListFor(x => , Enum.GetValues(typeof(UnitType))
-.Cast<UnitType>().Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }))*/ <text>  Reporting Unit  | </text>
-@Html.RadioButton("searchBy", "IncidentDate")<text> Date of Incident  | </text>
-@Html.RadioButton("searchBy", "Incident")<text> Type of Incident  |</text>
-@Html.TextBox("search")<input type="submit" value="Search" />
-}
-            </p>
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Unit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IncidentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Incident)
+                    </td>
+                </tr>
+            }
 
+        }
 
-            <div style="font-family: Arial">
+    </table>
+</div>
 
-                <table id="entry">
-
-                    <tr>
-                        <th align="center">
-                            @Html.DisplayNameFor(model => model.Unit)
-                        </th>
-                        <th align="center">
-                            @Html.DisplayNameFor(model => model.IncidentDate)
-                        </th>
-                        <th align="center">
-                            @Html.DisplayNameFor(model => model.Incident)
-                        </th>
-                    </tr>
-
-                    @if (Model.Count() == 0)
-                    {
-                        <tr>
-                            <td colspan="3">No Match with Search Criteria</td>
-                        </tr>
-                    }
-                    else
-                    {
-                        foreach (var item in Model)
-                        {
-                            <tr>
-                                <td align="center">
-                                    @Html.DisplayFor(modelItem => item.Unit)
-                                </td>
-                                <td align="center">
-                                    @Html.DisplayFor(modelItem => item.IncidentDate)
-                                </td>
-                                <td align="center">
-                                    @Html.DisplayFor(modelItem => item.Incident)
-                                </td>
-                            </tr>
-                        }
-                    }
-                </table>
-            </div>
-</body>

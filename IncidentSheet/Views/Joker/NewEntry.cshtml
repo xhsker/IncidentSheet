@@ -1,11 +1,7 @@
-﻿@model List<IncidentSheet.ViewModels.AddJokerViewModel>
+﻿@model List<IncidentSheet.Models.Joker>
 
-<h1>@ViewBag.Title</h1>
 
-@if (Model.Count == 0)
-{
-    <td width="100%"> No Incident Sheets have been entered</td>
-}
+
 
 <form asp-controller="Joker" asp-action="Add">
 
@@ -16,7 +12,7 @@
         <div class="form-group">
             <label class="form-group">Date of Incident</label>
             <span>
-                <text>@joker.IncidentDate.ToString("MM dd, yyyy")</text>
+                <text>@joker.IncidentDate.ToString("MM dd, yyyy") </text>
             </span>
         </div>
 
@@ -50,7 +46,9 @@
             </span>
         </div>
 
+
     }
+<a href="~/ViewModels/DropDownViewModel.cs">~/ViewModels/DropDownViewModel.cs</a>
 
 </form>
 

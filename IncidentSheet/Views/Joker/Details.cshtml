@@ -1,0 +1,83 @@
+﻿@model IEnumerable<IncidentSheet.Models.Joker>
+
+
+@{
+    ViewData["Title"] = "Joker Details";
+}
+
+<style>
+    #entry {
+        font-family: Tahoma;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #entry th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: forestgreen;
+            color: white
+        }
+
+        #entry td {
+            border: 1px solid;
+            padding: 8px;
+        }
+
+        #entry tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+</style>
+<h2>Joker Details</h2>
+
+<div>
+    @foreach (Joker joker in @Model)
+    {
+    <table style:"entry">
+        <tr>
+            <td>
+                <b>Incident Date:</b>
+            </td>
+            <td>
+                @joker.IncidentDate
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Incident Time:</b>
+            </td>
+            <td>
+                @joker.IncidentDate
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Reporting Unit:</b>
+            </td>
+            <td>
+                @joker.Unit
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Type of Incident:</b>
+            </td>
+            <td>
+                @joker.Incident
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Summary of Incident:</b>
+            </td>
+            <td>
+                @joker.Summary
+            </td>
+        </tr>
+    </table>
+
+    <a asp-action="Edit" asp-route-id="@joker.ID">Edit</a> 
+    <a asp-action="Index">Back to List</a>
+}
+</div>

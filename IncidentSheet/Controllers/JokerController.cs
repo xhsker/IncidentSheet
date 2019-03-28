@@ -2,16 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using IncidentSheet.Models;
 using IncidentSheet.ViewModels;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using IncidentSheet.Data;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using PagedList;
 
 
 namespace IncidentSheet.Controllers
 {
+    
     public class JokerController : Controller
-    {
+    {   
         private JokerDbContext context;
 
         public JokerController(JokerDbContext dbContext)
@@ -51,10 +51,10 @@ namespace IncidentSheet.Controllers
                 context.Jokers.Add(newJoker);
                 context.SaveChanges();
 
-                return Redirect("/NewEntry");
+                return View("NewEntry");
             }
             addJokerViewModel = new AddJokerViewModel();
-            return View(addJokerViewModel);
+            return View("Add");
 
 
         }
@@ -75,30 +75,58 @@ namespace IncidentSheet.Controllers
 
             context.SaveChanges();
 
-            return Redirect("/");
+            return View("/");
+        }
+
+        public IActionResult Search(string searchBy, string search, int? page, string sort)
+        {
+            ViewBag.SortByUnit = string.IsNullOrEmpty(sort) ? "Unit desc" : "";
+            ViewBag.SortByIncidentDate = sort == "IncidentDate" ? "IncidentDate desc" : "IncidentDate";
+            ViewBag.SortByIncident = sort == "Incident" ? "Incident desc" : "Incident";
+
+            var jokers = context.Jokers.AsQueryable();
+
+            if (searchBy == "Unit")
+            {
+                jokers = jokers.Where(x => x.Unit.Equals(search) || search == null);       
+            }
+            if (searchBy == "IncidentDate")
+            {
+                jokers = jokers.Where(x => x.IncidentDate.Equals(search) || search == null);     
+            }
+            if (searchBy == "Incident")
+            {
+                jokers = jokers.Where(x => x.Unit.Equals(search) || search == null);     
+            }
+            switch(sort)
+            {
+                case "Unit desc":
+                    jokers = jokers.OrderByDescending(x => x.Unit);
+                    break;
+                case "IncidentDate desc":
+                    jokers = jokers.OrderByDescending(x => x.IncidentDate);
+                    break;
+                case "Incident desc":
+                    jokers = jokers.OrderByDescending(x => x.Incident);
+                    break;
+                default:
+                    jokers = jokers.OrderBy(x => x.Unit);
+                    break;
+            }
+
+            return View(jokers.ToPagedList( page ?? 1, 3));
+        }
+
+        public ActionResult Details(int id)
+        {
+            Joker joker = context.Jokers.Single(jok => jok.ID == id);
+
+            return View(joker);
         }
     }
+    
 }
-
-/* public IActionResult Search(string searchBy, string search)
- {
-
-
-     if (searchBy == "Unit")
-     {
-         return View(context.Jokers.Where(x => x.Unit.Equals(search) || search == null).ToList());
-     }
-     if (searchBy == "IncidentDate")
-     {
-         return View(context.Jokers.Where(x => x.IncidentDate.Equals(search) || search == null).ToList());
-     }
-     if (searchBy == "Incident")
-     {
-         return View(context.Jokers.Where(x => x.Incident.StartsWith(search) || search == null).ToList());
-     }
-
-     return View("Index");
- }
+/*
  public async Task<IActionResult> Edit(int? id)
  {
      if (id == null)
@@ -148,3 +176,6 @@ namespace IncidentSheet.Controllers
 
 } 
 }*/
+
+        
+        

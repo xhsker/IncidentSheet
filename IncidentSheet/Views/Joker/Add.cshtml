@@ -26,7 +26,7 @@
         <div class="form-group">
                 <label class="control-label">Unit Reporting</label>
                 <b>Select Unit Type:</b> @Html.DropDownListFor(x => x.Unit, Enum.GetValues(typeof(UnitType))
-                .Cast<UnitType>().Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() }))
+                .Cast<UnitType>().Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString()}))
             <span asp-validation-for="Unit"></span>
             <br />
             <br />

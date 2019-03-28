@@ -78,3 +78,24 @@ namespace IncidnetLog.Controllers
         }
     }
 }
+
+/*  [HttpPost]
+ *  public Action Result Login (string txtUserName, string txtPassword)
+ *  {
+ *      string userName = Request.Form["userName"]; string password = Request.Form["userpassword"];
+ *      if (txtusername.Equals("user", StringComparison.CurrentCultureIgnoreCase)
+ *      && txtpassword.Equals("pass", StringComparison.CurrentCultureIgnoreCase))
+ *      {
+ *          return Content("Login successful!");
+ *      }
+ *      else
+ *      {
+ *          return Content("Login failed 1");
+ *      }
+ *  }
+ 
+     Html
+     
+
+    @html.textbox("txtUserName") : user
+     */
