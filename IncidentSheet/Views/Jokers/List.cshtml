@@ -1,0 +1,75 @@
+﻿
+@model IEnumerable<IncidentSheet.Models.Joker>
+
+
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<style>
+    #entry {
+        font-family: Tahoma;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #entry th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: forestgreen;
+            color: white
+        }
+
+        #entry td {
+            border: 1px solid;
+            padding: 8px;
+        }
+
+        #entry tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+</style>
+
+<h2>List of Jokers</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table" id="entry">
+    <thead>
+        <tr>
+            <th align="center">
+                @Html.DisplayNameFor(model => model.First().IncidentDate)
+            </th>
+            <th align="center">
+                @Html.DisplayNameFor(model => model.First().IncidentTime)
+            </th>
+            <th align="center">
+                @Html.DisplayNameFor(model => model.First().Unit)
+            </th>
+            <th align="center">
+                @Html.DisplayNameFor(model => model.First().Incident)
+            </th>
+    </thead>
+    @foreach (Joker joker in @Model)
+    {
+    <tr>
+        <td align="center">
+            @Html.ActionLink(joker.IncidentDate.ToString("MM/dd/yyyy"), "Details", new { id = joker.ID })
+        </td>
+        <td align="center">
+            @Html.DisplayFor(model => joker.IncidentTime)
+        </td>
+        <td align="center">
+            @Html.ActionLink(joker.Unit.GetDisplayName(), "Details", new {id = joker.ID })
+        </td>
+        <td align="center">
+            @Html.ActionLink(joker.Incident, "Details", new { id = joker.ID })
+        </td>
+    </tr>
+    }
+
+    </table>

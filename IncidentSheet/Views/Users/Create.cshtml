@@ -1,44 +1,40 @@
-﻿@model IncidentSheet.ViewModels.AddUserViewModel
+﻿@model IncidentSheet.Models.User
 
 @{
-    ViewData["Title"] = "Register as a new user";
+    ViewData["Title"] = "Create";
 }
 
-@{
-    <h3>@ViewBag.Message</h3>
-}
-<h2>Create a new account user</h2>
+<h2>Create</h2>
 
-<form asp-controller="User" asp-action="Add" method="post">
-
-    @Html.AntiForgeryToken()
-    <div class="row">
-        <div class="col-md-4">
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" type="text" />
+                <input asp-for="UserName" class="form-control" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UserPassword" class="control-label"></label>
-                <input asp-for="UserPassword" class="form-control" type="password" />
+                <input asp-for="UserPassword" class="form-control" />
                 <span asp-validation-for="UserPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="VerifyPassword" class="control-label"></label>
-                <input asp-for="VerifyPassword" class="form-control" type="password" />
+                <input asp-for="VerifyPassword" class="form-control" />
                 <span asp-validation-for="VerifyPassword" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
-        </div>
+        </form>
     </div>
+</div>
 
-    <div>
-        <a asp-controller="User" asp-action="Index">Login Page</a>
-    </div>
-</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 

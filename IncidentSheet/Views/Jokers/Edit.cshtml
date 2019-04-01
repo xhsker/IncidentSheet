@@ -1,0 +1,53 @@
+﻿@model IncidentSheet.Models.Joker
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h2>Edit</h2>
+
+<h4>Joker</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IncidentDate" class="control-label"></label>
+                <input asp-for="IncidentDate" class="form-control" />
+                <span asp-validation-for="IncidentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IncidentTime" class="control-label"></label>
+                <input asp-for="IncidentTime" class="form-control" />
+                <span asp-validation-for="IncidentTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @using (Html.BeginForm())
+                {
+                    <b>Select Reporting Unit:</b> @Html.DropDownListFor(x => x.Unit, Enum.GetValues(typeof(UnitType))
+                    .Cast<UnitType>().Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString()}), string.Empty)
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="Incident" class="control-label"></label>
+                <input asp-for="Incident" class="form-control" />
+                <span asp-validation-for="Incident" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Summary" class="control-label"></label>
+                <input asp-for="Summary" class="form-control" />
+                <span asp-validation-for="Summary" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -67,7 +67,7 @@ namespace IncidentSheet
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Joker}/{action=Index}/{id?}");
+                    template: "{controller=Jokers}/{action=Index}/{id?}");
             });
         }
     }

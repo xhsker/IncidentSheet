@@ -1,0 +1,73 @@
+﻿@model IEnumerable<IncidentSheet.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    #entry {
+        font-family: Tahoma;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #entry th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: forestgreen;
+            color: white
+        }
+
+        #entry td {
+            border: 1px solid;
+            padding: 8px;
+        }
+
+        #entry tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+</style>
+
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table" id="entry">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VerifyPassword)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserPassword)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VerifyPassword)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

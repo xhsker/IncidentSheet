@@ -1,0 +1,72 @@
+﻿@model IncidentSheet.Models.Joker
+
+@{
+    ViewData["Title"] = "Details";
+}
+<style>
+    h4 {
+        font-size: 32px;
+        font-family:Tahoma;
+        color: navy;
+        font: bold;
+        font: italic;
+        }
+    h2{
+        font-size: 70px;
+        font-family: Arial;
+        color: navy;
+        font: bolder;
+        display: inline-block;
+        align-content:stretch;
+    }
+
+    name{font-size: 25px;
+         font-family: 'Times New Roman';
+         text-decoration-color: forestgreen;
+         font: bold;
+    }
+
+</style>
+
+<h2 id="h2">Incident Sheet</h2>
+
+<div>
+    <h4 id="h4">Details of Joker</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IncidentDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IncidentTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IncidentTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Unit)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Incident)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Incident)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Summary)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Summary)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
